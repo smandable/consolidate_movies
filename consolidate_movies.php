@@ -229,29 +229,6 @@ function scanDriveFiles(string $root, bool $recursive, array $extensions): array
   return $files;
 }
 
-function looksLikeStudioTag(string $inner): bool
-{
-  $s = trim($inner);
-  if ($s === '') return false;
-
-  // avoid splitting on tech tags like "(1080p)" "(x264)" "(2021)" etc
-  if (preg_match('/\d/', $s)) return false;
-  if (preg_match('/\b(1080p|720p|2160p|4k|x264|x265|h\.?264|h\.?265|hevc|hdr|dvdrip|webrip|web[-\s]?dl|bluray|bdrip|remux|proper|repack)\b/i', $s)) {
-    return false;
-  }
-
-  // allow normal "name" content: letters/spaces/&/'/./-
-  return (bool)preg_match('/^[\p{L}\s&\'\.\-]+$/u', $s);
-}
-
-/**
- * Returns: [$base, $ep|null, $variantRaw]
- *
- * Examples:
- *  "Some Movie # 08 - Scene_2 blah" => ["Some Movie", 8, "- Scene_2 blah"]
- *  "Some Movie - CD1"                       => ["Some Movie", null, "- CD1"]
- *  "Some Movie - Disc 2 - Extras"           => ["Some Movie", null, "- Disc 2 - Extras"]
- */
 function parseBaseAndEpisode(string $nameNoExt): array
 {
   $s = trim($nameNoExt);
