@@ -75,3 +75,7 @@ Every action is logged to a TSV file with columns: timestamp, mode, group, actio
 
 - PHP 8.0+ (uses `str_starts_with`)
 - macOS (uses `/bin/mv` for cross-volume moves)
+
+## License
+
+MIT
